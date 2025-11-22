@@ -6,7 +6,15 @@ bash scripts/validate_token.sh
 # checkout fork repo (via temp dir as current dir is not emply and it does't allow to check out repo in it)
 git clone "https://${REPO_OWNER}:${ACTION_TOKEN}@github.com/${REPO_OWNER}/${REPO_NAME}.git" temp
 mv temp/* .
-mv temp//.git* .
+mv temp/.git* .
+
+echo "DEBUG — remaining in temp after moves:"
+ls -la temp || echo "temp missing?"
+
+# optional: stricter
+echo "DEBUG — find output:"
+find temp -maxdepth 2 -mindepth 1 -print || true
+
 rmdir temp
 
 
